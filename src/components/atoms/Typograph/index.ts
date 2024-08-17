@@ -1,0 +1,2 @@
+export { Typograph } from './Typograph';
+
