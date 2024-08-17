@@ -1,5 +1,4 @@
 import { UserService } from '@/services/UserService'
-import { api } from '@/utils/api'
 import { destroySession } from '@/utils/DestroySession'
 import { AxiosError } from 'axios'
 import Router from 'next/router'
@@ -40,8 +39,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { email, scholl } = response
     const tok = token || response.token
 
-    console.log('chamei aqui')
-
     setCookie(undefined, 'ischoll.scholl', scholl, {
       maxAge: 60 * 60 * 24 * 6
     })
@@ -63,18 +60,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function signIn({ email, password }: SignInParams) {
-    setUser(null)
-    const data = {
-      email: email.trim(),
-      password
+    try {
+      setUser(null)
+      const data = {
+        email: email.trim(),
+        password
+      }
+
+      const response = await UserService.login(data)
+
+      toast.success('Logado com sucesso.', { autoClose: 3000 })
+
+      await saveCookies({ response })
+    } catch (err) {
+      const { response } = err as AxiosError<{ error: { message: string } }>
+      toast.error(response?.data?.error?.message, { autoClose: 3000 })
     }
-
-    setCookie(undefined, 'nextauth.email', email, {
-      maxAge: 60 * 60 * 24 * 6
-    })
-
-    const response = await api().post('/users/auth', data)
-    await saveCookies({ response })
   }
 
   async function signUp({ email, password, scholl }: SignUpParams) {
@@ -87,8 +88,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
 
       const response = await UserService.createAccount(data)
-
-      console.log(response)
 
       toast.success('Cadastro completo com sucesso.')
 

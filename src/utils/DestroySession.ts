@@ -4,5 +4,6 @@ import { ParsedUrlQuery } from 'querystring'
 
 export const destroySession = (ctx?: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
   destroyCookie(ctx, 'ischoll.name')
+  destroyCookie(ctx, 'ischoll.scholl')
   destroyCookie(ctx, 'ischoll.token')
 }

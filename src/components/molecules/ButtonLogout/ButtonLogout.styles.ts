@@ -2,5 +2,6 @@ import styled from 'styled-components'
 
 export const Container = styled('div')(() => ({
   display: 'flex',
-  gap: '8px'
+  gap: '8px',
+  cursor: 'pointer'
 }))
