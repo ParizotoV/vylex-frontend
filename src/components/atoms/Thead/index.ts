@@ -1,0 +1,2 @@
+export { Thead } from './Thead';
+

@@ -9,7 +9,7 @@ const TextInput: React.FC<TextInputProps> = ({ helperText, label, ...rest }) => 
   return (
     <Container>
       {label && <Typograph>{label}</Typograph>}
-      <Input {...rest} />
+      <Input onChange={rest.onChange} value={rest.value} {...rest} />
       {helperText && <Typograph color={rest.error ? theme.PALLETE.ERROR[300] : undefined}>{helperText}</Typograph>}
     </Container>
   )

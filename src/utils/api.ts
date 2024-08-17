@@ -21,8 +21,8 @@ export const api = (token: string = 'noAuth') => {
       const { data } = await axiosClient(token).post(`api/${endpoint}`, body)
       return data
     },
-    patch: async <T>(endpoint: string, params?: Partial<T>): Promise<T> => {
-      const { data } = await axiosClient(token).patch(`api/${endpoint}`, params)
+    put: async <T>(endpoint: string, params?: Partial<T>): Promise<T> => {
+      const { data } = await axiosClient(token).put(`api/${endpoint}`, params)
       return data
     },
     delete: async <T>(endpoint: string, params?: any): Promise<T> => {
