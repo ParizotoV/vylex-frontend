@@ -1,4 +1,4 @@
-const StatusStudent = Object.freeze({
+export const StatusStudent = Object.freeze({
   active: 'Ativo',
   blocked: 'Bloqueado',
   inactive: 'Inativo',

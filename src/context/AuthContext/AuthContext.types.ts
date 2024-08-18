@@ -1,6 +1,7 @@
 export type User = {
   email: string
   scholl: string
+  id: string
 }
 
 export type SignInParams = {

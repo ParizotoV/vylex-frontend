@@ -1,9 +1,14 @@
 import StudentsPage from '@/components/pages/Students'
+import { StudentProvider } from '@/context/StudentContext/StudentContext'
 import { GetServerSidePropsContext } from 'next'
 import { parseCookies } from 'nookies'
 
 const Students = () => {
-  return <StudentsPage />
+  return (
+    <StudentProvider>
+      <StudentsPage />
+    </StudentProvider>
+  )
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {

@@ -4,7 +4,7 @@ export const ThCell = styled('th')(() => ({
   color: 'rgb(163, 166, 162)',
   backgroundColor: 'rgb(249, 251, 252)',
   fontWeight: 600,
-  padding: '8px 10px',
+  padding: '8px 16px',
   borderTopLeftRadius: '8px',
   borderTopRightRadius: '8px',
   fontSize: '0.875rem',

@@ -38,14 +38,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const saveCookies = async ({ response, token }: { response: any; token?: string }) => {
-    const { email, scholl } = response
+    const { email, scholl, id } = response
     const tok = token || response.token
 
     setCookie(undefined, 'ischoll.scholl', scholl, {
       maxAge: 60 * 60 * 24 * 6
     })
 
-    setCookie(undefined, 'ischoll.email', scholl, {
+    setCookie(undefined, 'ischoll.id', id, {
+      maxAge: 60 * 60 * 24 * 6
+    })
+
+    setCookie(undefined, 'ischoll.email', email, {
       maxAge: 60 * 60 * 24 * 6
     })
 
@@ -55,7 +59,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     setUser({
       scholl,
-      email
+      email,
+      id
     })
 
     Router.push('/alunos')
@@ -76,7 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await saveCookies({ response })
     } catch (err) {
       const { response } = err as AxiosError<{ error: { message: string } }>
-      toast.error(response?.data?.error?.message, { autoClose: 3000 })
+      toast.error('E-mail ou senha incorretos.', { autoClose: 3000 })
     }
   }
 
@@ -106,8 +111,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       toast.success('E-mail enviado em instantes está em sua caixa eletronica.')
     } catch (err) {
-      const { response } = err as AxiosError<{ error: { message: string } }>
-      toast.error(response?.data?.error?.message, { autoClose: 3000 })
+      toast.success('E-mail enviado em instantes está em sua caixa eletronica.', { autoClose: 3000 })
     }
   }
 

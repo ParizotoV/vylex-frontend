@@ -1,6 +1,7 @@
 export type TableProps = {
   header: HeaderProps[]
-  rows: JSX.Element[]
+  rows: any
+  loading: boolean
 }
 
 export type HeaderProps = {

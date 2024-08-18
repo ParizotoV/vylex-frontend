@@ -1,11 +1,12 @@
 // import "@/styles/globals.css";
-import { AuthProvider } from '@/context/AuthContex'
+import { AuthProvider } from '@/context/AuthContext'
 import '@/styles/global.css'
 import theme from '@/theme'
 import type { AppProps } from 'next/app'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { Bounce, ToastContainer } from 'react-toastify'
-import { ThemeProvider } from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
+import { ThemeProvider } from 'styled-components'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

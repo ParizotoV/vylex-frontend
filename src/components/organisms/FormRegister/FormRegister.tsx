@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button } from '@/components/atoms/Button/Button'
+import { Loader } from '@/components/atoms/Loader/Loader'
 import { Typograph } from '@/components/atoms/Typograph'
 import TextInput from '@/components/molecules/TextInput'
-import { useAuthContext } from '@/context/AuthContex'
+import { useAuthContext } from '@/context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import { FormRegisterSchema, FormRegisterSchemaType } from './FormRegister.schema'
@@ -16,8 +17,12 @@ const FormRegister: React.FC = () => {
     resolver: yupResolver(FormRegisterSchema)
   })
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const onSubmit = async ({ email, password, scholl }: FormRegisterSchemaType) => {
+    setLoading(true)
     await signUp({ email, password, scholl })
+    setLoading(false)
   }
 
   return (
@@ -74,7 +79,7 @@ const FormRegister: React.FC = () => {
           )}
         />
         <Button type="submit" fullWidth>
-          ENTRAR
+          {loading ? <Loader /> : 'ENTRAR'}
         </Button>
       </WrapperForm>
     </Form>

@@ -1,9 +1,11 @@
 import { Button } from '@/components/atoms/Button/Button'
+import { Loader } from '@/components/atoms/Loader/Loader'
 import { Typograph } from '@/components/atoms/Typograph'
 import TextInput from '@/components/molecules/TextInput'
-import { useAuthContext } from '@/context/AuthContex'
+import { useAuthContext } from '@/context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { FormLoginSchema, FormLoginType } from './FormLogin.schema'
 import { Form, WrapperForm, WrapperTitle } from './FormLogin.styles'
@@ -15,8 +17,12 @@ const FormLogin = () => {
     resolver: yupResolver(FormLoginSchema)
   })
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const onSubmit = async (dataForm: FormLoginType) => {
+    setLoading(true)
     await signIn({ ...dataForm })
+    setLoading(false)
   }
 
   return (
@@ -57,7 +63,7 @@ const FormLogin = () => {
           </Typograph>
         </div>
 
-        <Button fullWidth>ENTRAR</Button>
+        <Button fullWidth>{loading ? <Loader /> : 'ENTRAR'}</Button>
       </WrapperForm>
     </Form>
   )

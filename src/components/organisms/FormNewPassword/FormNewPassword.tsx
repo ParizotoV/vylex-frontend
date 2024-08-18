@@ -1,23 +1,28 @@
 import { Button } from '@/components/atoms/Button/Button'
+import { Loader } from '@/components/atoms/Loader/Loader'
 import TextInput from '@/components/molecules/TextInput'
-import { useAuthContext } from '@/context/AuthContex'
+import { useAuthContext } from '@/context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { FormNewPasswordSchema, FormNewPasswordType } from './FormNewPassword.schema'
 import { Form, WrapperForm } from './FormNewPassword.styles'
 
 const FormNewPassword = () => {
   const { newPassword } = useAuthContext()
-
   const { query } = useRouter()
 
   const { control, handleSubmit } = useForm<FormNewPasswordType>({
     resolver: yupResolver(FormNewPasswordSchema)
   })
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const onSubmit = async (dataForm: FormNewPasswordType) => {
+    setLoading(true)
     await newPassword(dataForm.password, query?.token as string, query?.userId as string)
+    setLoading(false)
   }
 
   return (
@@ -52,7 +57,7 @@ const FormNewPassword = () => {
           )}
         />
         <Button type="submit" fullWidth>
-          RECUPERAR
+          {loading ? <Loader /> :'RECUPERAR' }
         </Button>
       </WrapperForm>
     </Form>
