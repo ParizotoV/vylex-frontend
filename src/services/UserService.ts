@@ -11,4 +11,16 @@ export class UserService {
 
     return response
   }
+  public static async recoverPassword(email: string) {
+    const response = await api().post('/users/password-recovery', { email })
+
+    return response
+  }
+  public static async newPassword(data: any): Promise<any> {
+    const response = api(data.token).put(`/users/${data.userId}`, {
+      password: data.password
+    })
+
+    return response
+  }
 }

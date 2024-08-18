@@ -53,7 +53,7 @@ const FormLogin = () => {
             )}
           />
           <Typograph size="SM" bold>
-            <Link href="/esqueceu-sua-senha">Esqueceu sua senha?</Link>
+            <Link href="/recuperar-senha">Esqueceu sua senha?</Link>
           </Typograph>
         </div>
 

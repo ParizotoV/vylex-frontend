@@ -11,6 +11,8 @@ export type AuthContextType = {
   user: User | null
   signIn: (data: SignInParams) => Promise<any>
   signUp: (data: SignUpParams) => Promise<any>
+  recoverPassword: (email: string) => Promise<any>
+  newPassword: (password: string, token: string, userId: string) => Promise<any>
   signOut: () => void
 }
 
@@ -98,6 +100,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function recoverPassword(email: string) {
+    try {
+      await UserService.recoverPassword(email)
+
+      toast.success('E-mail enviado em instantes está em sua caixa eletronica.')
+    } catch (err) {
+      const { response } = err as AxiosError<{ error: { message: string } }>
+      toast.error(response?.data?.error?.message, { autoClose: 3000 })
+    }
+  }
+
+  async function newPassword(password: string, token: string, userId: string) {
+    try {
+      const user = await UserService.newPassword({ password, token, userId })
+
+      signIn({ email: user?.email, password: password })
+    } catch (err) {
+      const { response } = err as AxiosError<{ error: { message: string } }>
+      toast.error(response?.data?.error?.message, { autoClose: 3000 })
+    }
+  }
+
   const signOut = async () => {
     destroySession()
     setUser(null)
@@ -109,9 +133,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       signIn,
       signOut,
       signUp,
+      recoverPassword,
+      newPassword,
       user
     }),
-    [user, signIn, signOut, user]
+    [user, signIn, signOut, signUp, recoverPassword]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
