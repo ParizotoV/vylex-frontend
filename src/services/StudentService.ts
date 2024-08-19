@@ -46,4 +46,11 @@ export class StudentService {
 
     return response
   }
+  public static async deleteStudent(id: string): Promise<any> {
+    const { ['ischoll.token']: token } = parseCookies()
+
+    const response = await api(token).delete(`students/${id}`)
+
+    return response
+  }
 }

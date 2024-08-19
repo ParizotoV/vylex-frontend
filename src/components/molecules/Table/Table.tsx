@@ -32,16 +32,20 @@ const Table: React.FC<TableProps> = ({ header, rows, loading, rowAction }) => {
         <Tbody>
           {!!rows &&
             rows.map((row: any, i: number) => (
-              <Tr
-                key={i}
-                cell={1}
-                {...(rowAction && {
-                  onClick: () => rowAction(row.uuid)
-                })}
-              >
+              <Tr key={i} cell={1}>
                 {Object.keys(row).map((key: any, i) => {
                   if (key === 'uuid') return
-                  return <ThBody key={i}>{row[key]}</ThBody>
+                  return (
+                    <ThBody
+                      key={i}
+                      {...(rowAction &&
+                        i < Object.keys(row)?.length - 1 && {
+                          onClick: () => rowAction(row.uuid)
+                        })}
+                    >
+                      {row[key]}
+                    </ThBody>
+                  )
                 })}
               </Tr>
             ))}

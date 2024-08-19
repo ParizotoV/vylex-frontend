@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export type FiltersTableParams = {
   page: number
   per: number
@@ -27,8 +29,31 @@ export type Student = {
   updatedAt: Date
 }
 
-export type ModalProps = {
+export type AuthContextType = {
+  filters: FiltersTableParams
+  result: Student[]
+  modal: ModalParams
+  reloadTable: boolean
+  deleteStudent: DeleteStudentParams
+  updateFilters: Dispatch<SetStateAction<FiltersTableParams>>
+  updateResult: Dispatch<SetStateAction<Student[]>>
+  updateModal: Dispatch<SetStateAction<ModalParams>>
+  updateTable: Dispatch<SetStateAction<boolean>>
+  updateDeleteStudent: Dispatch<SetStateAction<DeleteStudentParams>>
+}
+
+export type ModalParams = {
   editing: boolean
   id: string
   open: boolean
+}
+
+export type DeleteStudentParams = {
+  open: boolean
+  id: string
+  name: string
+}
+
+export type StudentProviderProps = {
+  children: React.ReactNode
 }

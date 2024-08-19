@@ -11,11 +11,13 @@ import { StudentService } from '@/services/StudentService'
 import React, { useEffect, useState } from 'react'
 import { convertToRows } from './Students.mapper'
 import { WrapperFilter } from './Students.styles'
+import DeleteStudent from './component/DeleteStudent'
 
 const StudentsPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
-  const { updateResult, updateFilters, updateModal, filters, result, reloadTable } = useStudentContext()
+  const { updateResult, updateFilters, updateModal, updateDeleteStudent, filters, result, reloadTable } =
+    useStudentContext()
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
@@ -77,6 +79,14 @@ const StudentsPage: React.FC = () => {
     })
   }
 
+  const handleDeleteStudent = (id: string, name: string) => {
+    updateDeleteStudent({
+      open: true,
+      id,
+      name
+    })
+  }
+
   useEffect(() => {
     getStudents()
   }, [filters?.page, filters?.per, reloadTable])
@@ -100,7 +110,7 @@ const StudentsPage: React.FC = () => {
             { id: 'active', label: 'Ativo' },
             { id: 'actions', label: '' }
           ]}
-          rows={convertToRows(result)}
+          rows={convertToRows(result, { handleDeleteStudent })}
           loading={loading}
           rowAction={handleEditStudent}
         />
@@ -125,6 +135,7 @@ const StudentsPage: React.FC = () => {
           previous={filters?.previousPage}
         />
         <FormStudent />
+        <DeleteStudent />
       </>
     </LoggedTemplate>
   )

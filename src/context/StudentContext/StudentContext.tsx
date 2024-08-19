@@ -1,20 +1,12 @@
-import { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from 'react'
-import { FiltersTableParams, ModalProps, Student } from './StudentContext.types'
-
-export type AuthContextType = {
-  filters: FiltersTableParams
-  result: Student[]
-  modal: ModalProps
-  reloadTable: boolean
-  updateFilters: Dispatch<SetStateAction<FiltersTableParams>>
-  updateResult: Dispatch<SetStateAction<Student[]>>
-  updateModal: Dispatch<SetStateAction<ModalProps>>
-  updateTable: Dispatch<SetStateAction<boolean>>
-}
-
-type StudentProviderProps = {
-  children: React.ReactNode
-}
+import { createContext, useContext, useMemo, useState } from 'react'
+import {
+  AuthContextType,
+  DeleteStudentParams,
+  FiltersTableParams,
+  ModalParams,
+  Student,
+  StudentProviderProps
+} from './StudentContext.types'
 
 export function StudentProvider({ children }: StudentProviderProps) {
   const [filters, setFilters] = useState<FiltersTableParams>({
@@ -31,10 +23,15 @@ export function StudentProvider({ children }: StudentProviderProps) {
   const [result, setResult] = useState<Student[]>([])
   const [reloadTable, setReloadTable] = useState<boolean>(false)
 
-  const [modal, setModal] = useState<ModalProps>({
+  const [modal, setModal] = useState<ModalParams>({
     id: '',
     editing: false,
     open: false
+  })
+  const [deleteStudent, setDeleteStudent] = useState<DeleteStudentParams>({
+    open: false,
+    id: '',
+    name: ''
   })
 
   const value = useMemo(
@@ -43,12 +40,14 @@ export function StudentProvider({ children }: StudentProviderProps) {
       result,
       modal,
       reloadTable,
+      deleteStudent,
       updateFilters: setFilters,
       updateResult: setResult,
       updateModal: setModal,
-      updateTable: setReloadTable
+      updateTable: setReloadTable,
+      updateDeleteStudent: setDeleteStudent
     }),
-    [filters, setFilters, result, setResult, modal, setModal]
+    [filters, setFilters, result, setResult, modal, setModal, deleteStudent, setDeleteStudent]
   )
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>
