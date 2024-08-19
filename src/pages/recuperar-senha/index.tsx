@@ -1,6 +1,8 @@
 import NewPasswordPage from '@/components/pages/NewPassword/NewPassword'
 import RecoverPasswordPage from '@/components/pages/RecoverPassword/RecoverPassword'
+import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
+import { parseCookies } from 'nookies'
 
 const RecoverPassword = () => {
   const { query } = useRouter()
@@ -10,6 +12,21 @@ const RecoverPassword = () => {
   }
 
   return <RecoverPasswordPage />
+}
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { ['ischoll.token']: token } = parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/alunos'
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }
 
 export default RecoverPassword

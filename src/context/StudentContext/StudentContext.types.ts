@@ -26,3 +26,9 @@ export type Student = {
   createdAt: Date
   updatedAt: Date
 }
+
+export type ModalProps = {
+  editing: boolean
+  id: string
+  open: boolean
+}

@@ -21,4 +21,13 @@ export class StudentService {
 
     return response
   }
+  public static async createStudent(data: any): Promise<any> {
+    const { ['ischoll.token']: token } = parseCookies()
+
+    const response = await api(token).post(`students`, {
+      ...data
+    })
+
+    return response
+  }
 }

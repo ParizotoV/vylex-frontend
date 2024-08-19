@@ -3,6 +3,7 @@ import { Typograph } from '@/components/atoms/Typograph'
 import Pagination from '@/components/molecules/Pagination/Pagination'
 import Table from '@/components/molecules/Table/Table'
 import TextInput from '@/components/molecules/TextInput'
+import FormStudent from '@/components/organisms/FormStudent/FormStudent'
 import LoggedTemplate from '@/components/templates/LoggedTemplate/LoggedTemplate'
 import { useStudentContext } from '@/context/StudentContext/StudentContext'
 import { useDebouce } from '@/hook/useDebouce'
@@ -13,7 +14,8 @@ import { WrapperFilter } from './Students.styles'
 
 const StudentsPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
-  const { updateResult, updateFilters, filters, result } = useStudentContext()
+
+  const { updateResult, updateFilters, updateModal, filters, result, reloadTable } = useStudentContext()
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
@@ -60,9 +62,16 @@ const StudentsPage: React.FC = () => {
     setLoading(false)
   }
 
+  const handleOpenModal = () => {
+    updateModal((prevState) => ({
+      ...prevState,
+      open: true
+    }))
+  }
+
   useEffect(() => {
     getStudents()
-  }, [filters?.page, filters?.per])
+  }, [filters?.page, filters?.per, reloadTable])
 
   return (
     <LoggedTemplate>
@@ -72,7 +81,7 @@ const StudentsPage: React.FC = () => {
         </Typograph>
         <WrapperFilter>
           <TextInput name="email" placeholder="Buscar por email" onChange={handleChangeEmail} value={filters?.email} />
-          <Button>Novo aluno</Button>
+          <Button onClick={handleOpenModal}>Novo aluno</Button>
         </WrapperFilter>
         <Table
           header={[
@@ -106,6 +115,7 @@ const StudentsPage: React.FC = () => {
           next={filters?.nextPage}
           previous={filters?.previousPage}
         />
+        <FormStudent />
       </>
     </LoggedTemplate>
   )

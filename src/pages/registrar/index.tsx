@@ -1,7 +1,25 @@
 import RegisterPage from '@/components/pages/Register/Register'
+import { GetServerSidePropsContext } from 'next'
+import { parseCookies } from 'nookies'
 
-const Login = () => {
+const Register = () => {
   return <RegisterPage />
 }
 
-export default Login
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { ['ischoll.token']: token } = parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/alunos'
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
+
+export default Register

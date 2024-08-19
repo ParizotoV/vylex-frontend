@@ -11,7 +11,6 @@ const NavbarWrapper = styled('nav')(({ theme }) => ({
   gap: '100px',
   position: 'relative',
   boxShadow: 'rgb(227, 230, 227) 0px 1px 0px',
-  height: '100%',
   width: '260px',
   boxSizing: 'border-box',
   '@media (max-width: 704px)': {

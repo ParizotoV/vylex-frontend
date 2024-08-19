@@ -1,11 +1,15 @@
 import { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from 'react'
-import { FiltersTableParams, Student } from './StudentContext.types'
+import { FiltersTableParams, ModalProps, Student } from './StudentContext.types'
 
 export type AuthContextType = {
   filters: FiltersTableParams
   result: Student[]
+  modal: ModalProps
+  reloadTable: boolean
   updateFilters: Dispatch<SetStateAction<FiltersTableParams>>
   updateResult: Dispatch<SetStateAction<Student[]>>
+  updateModal: Dispatch<SetStateAction<ModalProps>>
+  updateTable: Dispatch<SetStateAction<boolean>>
 }
 
 type StudentProviderProps = {
@@ -25,15 +29,26 @@ export function StudentProvider({ children }: StudentProviderProps) {
   })
 
   const [result, setResult] = useState<Student[]>([])
+  const [reloadTable, setReloadTable] = useState<boolean>(false)
+
+  const [modal, setModal] = useState<ModalProps>({
+    id: '',
+    editing: false,
+    open: false
+  })
 
   const value = useMemo(
     () => ({
       filters,
       result,
+      modal,
+      reloadTable,
       updateFilters: setFilters,
-      updateResult: setResult
+      updateResult: setResult,
+      updateModal: setModal,
+      updateTable: setReloadTable
     }),
-    [filters, setFilters, result, setResult]
+    [filters, setFilters, result, setResult, modal, setModal]
   )
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>
