@@ -1,5 +1,5 @@
-import FormLogin from '@/components/organisms/FormLogin/FormLogin'
-import AuthTemplate from '@/components/templates/AuthTemplate/AuthTemplate'
+import FormLogin from '@/components/organisms/FormLogin'
+import AuthTemplate from '@/components/templates/AuthTemplate'
 import React from 'react'
 
 const LoginPage: React.FC = () => {

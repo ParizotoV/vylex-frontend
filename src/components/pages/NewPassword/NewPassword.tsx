@@ -1,4 +1,4 @@
-import FormNewPassword from '@/components/organisms/FormNewPassword/FormNewPassword'
+import FormNewPassword from '@/components/organisms/FormNewPassword'
 import AuthTemplate from '@/components/templates/AuthTemplate'
 import React from 'react'
 

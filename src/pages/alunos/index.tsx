@@ -1,5 +1,5 @@
 import StudentsPage from '@/components/pages/Students'
-import { StudentProvider } from '@/context/StudentContext/StudentContext'
+import { StudentProvider } from '@/context/StudentContext'
 import { GetServerSidePropsContext } from 'next'
 import { parseCookies } from 'nookies'
 

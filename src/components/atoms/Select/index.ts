@@ -1,2 +1,2 @@
-export { Select } from './Select';
+export { Select, SelectInput } from './Select';
 

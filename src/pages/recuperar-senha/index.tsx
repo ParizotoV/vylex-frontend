@@ -1,5 +1,5 @@
-import NewPasswordPage from '@/components/pages/NewPassword/NewPassword'
-import RecoverPasswordPage from '@/components/pages/RecoverPassword/RecoverPassword'
+import NewPasswordPage from '@/components/pages/NewPassword'
+import RecoverPasswordPage from '@/components/pages/RecoverPassword'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'

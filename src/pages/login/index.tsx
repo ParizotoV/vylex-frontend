@@ -1,4 +1,4 @@
-import LoginPage from '@/components/pages/Login/Login'
+import LoginPage from '@/components/pages/Login'
 import { GetServerSidePropsContext } from 'next'
 import { parseCookies } from 'nookies'
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { Button } from '@/components/atoms/Button/Button'
-import { Loader } from '@/components/atoms/Loader/Loader'
+import { Button } from '@/components/atoms/Button'
+import { Loader } from '@/components/atoms/Loader'
 import { Typograph } from '@/components/atoms/Typograph'
 import TextInput from '@/components/molecules/TextInput'
 import { useAuthContext } from '@/context/AuthContext'

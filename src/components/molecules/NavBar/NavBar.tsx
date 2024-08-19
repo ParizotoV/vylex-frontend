@@ -4,8 +4,8 @@ import {
   NavLinkWrapper,
   StyledFontAwesomeIcon,
   StyledNavLink
-} from '@/components/atoms/NavBar/NavBar'
-import ButtonLogout from '@/components/molecules/ButtonLogout/ButtonLogout'
+} from '@/components/atoms/NavBar'
+import ButtonLogout from '@/components/molecules/ButtonLogout'
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { useRouter } from 'next/router'

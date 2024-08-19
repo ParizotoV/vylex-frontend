@@ -1,4 +1,4 @@
-import RegisterPage from '@/components/pages/Register/Register'
+import RegisterPage from '@/components/pages/Register'
 import { GetServerSidePropsContext } from 'next'
 import { parseCookies } from 'nookies'
 

@@ -1,6 +1,6 @@
 import { Button } from '@/components/atoms/Button'
 import { Typograph } from '@/components/atoms/Typograph'
-import { useStudentContext } from '@/context/StudentContext/StudentContext'
+import { useStudentContext } from '@/context/StudentContext'
 import { StudentService } from '@/services/StudentService'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

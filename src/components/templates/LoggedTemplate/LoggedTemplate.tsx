@@ -1,4 +1,4 @@
-import Navbar from '@/components/molecules/NavBar/NavBar'
+import Navbar from '@/components/molecules/NavBar'
 import React from 'react'
 import { LoggedTemplateProps } from './LoggedTemplate.types'
 import { Container, WrapperChildren } from './LoggerTemplate.styles'

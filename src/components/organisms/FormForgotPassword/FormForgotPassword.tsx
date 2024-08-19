@@ -1,5 +1,5 @@
-import { Button } from '@/components/atoms/Button/Button'
-import { Loader } from '@/components/atoms/Loader/Loader'
+import { Button } from '@/components/atoms/Button'
+import { Loader } from '@/components/atoms/Loader'
 import TextInput from '@/components/molecules/TextInput'
 import { useAuthContext } from '@/context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
