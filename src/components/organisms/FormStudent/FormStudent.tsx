@@ -151,7 +151,7 @@ const FormStudent: React.FC = () => {
             control={control}
             name="document"
             render={({ field, fieldState: { error } }) => (
-              <TextInput
+              <NumberInput
                 {...field}
                 onChange={(event) => {
                   if (event.target.value.length <= 11) field.onChange(event.target.value)
