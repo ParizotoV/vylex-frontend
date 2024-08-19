@@ -8,7 +8,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Container, ContainerSkeleton } from './Table.styles'
 import { TableProps } from './Table.types'
 
-const Table: React.FC<TableProps> = ({ header, rows, loading }) => {
+const Table: React.FC<TableProps> = ({ header, rows, loading, rowAction }) => {
   if (loading) {
     return (
       <ContainerSkeleton>
@@ -32,7 +32,13 @@ const Table: React.FC<TableProps> = ({ header, rows, loading }) => {
         <Tbody>
           {!!rows &&
             rows.map((row: any, i: number) => (
-              <Tr key={i} cell={1}>
+              <Tr
+                key={i}
+                cell={1}
+                {...(rowAction && {
+                  onClick: () => rowAction(row.uuid)
+                })}
+              >
                 {Object.keys(row).map((key: any, i) => {
                   if (key === 'uuid') return
                   return <ThBody key={i}>{row[key]}</ThBody>

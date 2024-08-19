@@ -69,6 +69,14 @@ const StudentsPage: React.FC = () => {
     }))
   }
 
+  const handleEditStudent = (id: string) => {
+    updateModal({
+      editing: true,
+      open: true,
+      id
+    })
+  }
+
   useEffect(() => {
     getStudents()
   }, [filters?.page, filters?.per, reloadTable])
@@ -94,6 +102,7 @@ const StudentsPage: React.FC = () => {
           ]}
           rows={convertToRows(result)}
           loading={loading}
+          rowAction={handleEditStudent}
         />
         <Pagination
           page={filters?.page}

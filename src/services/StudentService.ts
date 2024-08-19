@@ -30,4 +30,20 @@ export class StudentService {
 
     return response
   }
+  public static async getStudent(id: string): Promise<any> {
+    const { ['ischoll.token']: token } = parseCookies()
+
+    const response = await api(token).get(`students/${id}`)
+
+    return response
+  }
+  public static async updateStudent(id: string, data: any): Promise<any> {
+    const { ['ischoll.token']: token } = parseCookies()
+
+    const response = await api(token).put(`students/${id}`, {
+      ...data
+    })
+
+    return response
+  }
 }
