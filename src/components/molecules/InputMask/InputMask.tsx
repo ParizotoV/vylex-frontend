@@ -9,7 +9,7 @@ const MaskInput: React.FC<InputMaskProps> = ({ helperText, label, ...rest }) => 
   return (
     <Container>
       {label && <Typograph>{label}</Typograph>}
-      <InputMaskStyled onChange={rest.onChange} value={rest.value} {...rest} />
+      <InputMaskStyled id="InputMask" onChange={rest.onChange} value={rest.value} {...rest} />
       {helperText && <Typograph color={rest.error ? theme.PALLETE.ERROR[300] : undefined}>{helperText}</Typograph>}
     </Container>
   )
