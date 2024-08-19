@@ -29,7 +29,6 @@ const FormStudent: React.FC = () => {
   const onSubmit = async (dataForm: FormStudentSchemaType) => {
     try {
       setLoading(true)
-      console.log(modal)
       if (modal.editing) {
         await StudentService.updateStudent(modal.id, dataForm)
       } else {
